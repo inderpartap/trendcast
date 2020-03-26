@@ -1,8 +1,10 @@
-import pandas as pd
-from utils.utils import *
-from weather import get_period
 import csv
 import math
+
+import pandas as pd
+
+from utils.utils import *
+from weather import get_period
 
 # get weather daily for 6 months period max for a station id, by checking it's min and max date from retail data
 
