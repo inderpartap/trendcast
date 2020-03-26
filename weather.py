@@ -2,7 +2,6 @@ import pandas as pd
 
 from utils.utils import *
 
-
 # Fashion Retail Data
 RETAIL_PATH = "fashion_retail.csv"
 STATIONS_PATH = "stations.csv"
@@ -22,9 +21,9 @@ def fetch_stations(cities):
     # get station IDs for all cities
     stations = []
     for city in cities:
-        response = send_request(
-            api="weather", end_point="stations", params=dict(q=city)
-        )
+        response = send_request(api="weather",
+                                end_point="stations",
+                                params=dict(q=city))
         stations.extend(response)
 
     return stations
