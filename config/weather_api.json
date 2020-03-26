@@ -1,0 +1,18 @@
+{
+	"url": "https://api.meteostat.net/v1/",
+	"key": true,
+	"hourly": {
+		"end_point": "history/hourly",
+		"params": {
+			"start": true,
+			"end": true,
+			"station": true
+		}
+	},
+	"stations": {
+		"end_point": "stations/search",
+		"params": {
+			"q": true
+		}
+	}
+}
