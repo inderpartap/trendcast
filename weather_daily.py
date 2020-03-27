@@ -7,9 +7,9 @@ import math
 #get weather daily for 6 months period max for a station id, by checking it's min and max date from retail data
 
 # Fashion Retail Data
-RETAIL_PATH = "fashion_retail.csv"
-STATIONS_PATH = "stations.csv"
-CITY_PATH = "citynames.csv"
+RETAIL_PATH = "data/fashion_retail.csv"
+STATIONS_PATH = "data/stations.csv"
+CITY_PATH = "data/citynames.csv"
 
 def weather_daily(city_id_name_df,retail_df):
 
@@ -71,13 +71,13 @@ def main():
 
 	#create cleaned station_ids with city names
 	#uncomment to generate file
-	# city_id_names = get_city_ids(city_data)
-	# saveFileasCSV("city_id_names",city_id_names,["name","station_id"])
+	city_id_names = get_city_ids(city_data)
+	saveFileasCSV("data/city_id_names",city_id_names,["name","station_id"])
 
-	city_id_names_df = load_data("city_id_names.csv",type="csv")
+	city_id_names_df = load_data("data/city_id_names.csv",type="csv")
 	daily_data = weather_daily(city_id_names_df,retail_data)
 	#saving the weather daily data as csv
-	pd.DataFrame(daily_data).to_csv('weather_daily.csv', index=False)
+	pd.DataFrame(daily_data).to_csv('data/weather_daily.csv', index=False)
 
 if __name__=='__main__':	
 	main()
