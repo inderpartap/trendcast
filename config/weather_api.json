@@ -9,6 +9,14 @@
 			"station": true
 		}
 	},
+	"daily":{
+		"end_point": "history/daily",
+		"params": {
+			"start": true,
+			"end": true,
+			"station": true
+		}
+	},
 	"stations": {
 		"end_point": "stations/search",
 		"params": {
