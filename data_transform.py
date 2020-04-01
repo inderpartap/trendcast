@@ -9,7 +9,8 @@ RETAIL_COMBINED_PATH = "data/trendcast_dataset.csv"
 # given the retail data, create onehot-encoding of the dept wise quantity sold
 # group by city to compress the data
 def create_onehot(df):
-    df = df.groupby(["date", "province", "city", "department"]).sum().reset_index()
+    df = df.groupby(["date", "province", "city",
+                     "department"]).sum().reset_index()
 
     # set the initial values to 0
     df = df.assign(
@@ -28,8 +29,7 @@ def create_onehot(df):
             "department12": 0,
             "department13": 0,
             "department14": 0,
-        }
-    )
+        })
 
     # for each value in department column, update the one-hot columns
     for i in range(len(df)):
@@ -53,9 +53,9 @@ def add_weather(city_df, weather_df):
 
     # fill in missing province values
     result = pd.merge(provinces, result, on=["city"])
-    result = result.rename(columns={"province_x": "province"}).drop(
-        "province_y", axis=1
-    )
+    result = result.rename(columns={
+        "province_x": "province"
+    }).drop("province_y", axis=1)
 
     columnlist = list(result.columns.values.tolist())[3:19]
     # fill the missing transaction records as 0; ~0.05% of data
@@ -67,16 +67,13 @@ def add_weather(city_df, weather_df):
 def main():
     # load retail sales data
     retail_data = pd.read_csv(RETAIL_PATH).drop(
-        ["Unnamed: 0", "category", "class", "style", "vendor"], axis=1
-    )
+        ["Unnamed: 0", "category", "class", "style", "vendor"], axis=1)
     retail_data["city"] = retail_data["city"].str.lower()
 
     # load weather data
-    weather_data = (
-        pd.read_csv(WEATHER_PATH)
-        .rename(columns={"station_name": "city"})
-        .drop("station_id", axis=1)
-    )
+    weather_data = (pd.read_csv(WEATHER_PATH).rename(columns={
+        "station_name": "city"
+    }).drop("station_id", axis=1))
 
     # create onehot encoding of the department column
     city_data = create_onehot(retail_data)
