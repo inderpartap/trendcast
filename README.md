@@ -29,6 +29,13 @@ Install the application requirements in a linux environment:
 pip install requirements.txt
 ```
 
+Make sure to unzip the retail dataset to start working. The prebuilt dataset can be found [here](https://github.com/inderpartap/trendcast/blob/master/data/fashion_retail.csv)
+
+```sh
+unzip fashion_retail.zip
+```
+
+
 That's it. You can now start contributing to the project.
 
 ## Code Contributors
@@ -44,7 +51,7 @@ Thanks to the following people who have contributed to this project:
 
 Contributions, issues and feature requests are welcome.<br /> Feel free to check
 [issues page](https://github.com/inderpartap/trendcast/issues) if you want to
-contribute.<br /> To contribute to <project_name>, follow these steps:
+contribute.<br /> To contribute to Trendcast, follow these steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
