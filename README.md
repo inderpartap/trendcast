@@ -29,12 +29,13 @@ Install the application requirements in a linux environment:
 pip install requirements.txt
 ```
 
-Make sure to unzip the retail dataset to start working. The prebuilt dataset can be found [here](https://github.com/inderpartap/trendcast/blob/master/data/fashion_retail.csv)
+Make sure to unzip the retail dataset to start working. The prebuilt dataset can
+be found
+[here](https://github.com/inderpartap/trendcast/blob/master/data/fashion_retail.csv)
 
 ```sh
 unzip fashion_retail.zip
 ```
-
 
 That's it. You can now start contributing to the project.
 
