@@ -10,6 +10,14 @@ config = {
 	'keys': "config/api_keys.json"
 }
 
+datapath = {
+	'stations': "data/stations.csv",
+	'cities': "data/citynames.csv",
+	'weather': "data/weather_daily.csv",
+	'retail': "data/fashion_retail.csv",
+	'trendcast': 'data/trendcast_dataset.csv'
+}
+
 
 def load_data(PATH, type='csv'):
 	df = pd.DataFrame()
