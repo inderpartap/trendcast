@@ -1,9 +1,5 @@
 import pandas as pd
-
-# Dataset Paths
-RETAIL_PATH = "data/fashion_retail.csv"
-WEATHER_PATH = "data/weather_daily.csv"
-RETAIL_COMBINED_PATH = "data/trendcast_dataset.csv"
+from utils.utils import datapath
 
 
 # given the retail data, create onehot-encoding of the dept wise quantity sold
@@ -18,14 +14,17 @@ def create_onehot(df):
 									'department13': 0,'department14': 0}) 
 
 	# for each value in department column, update the one-hot columns
-	for i in range(len(df)):
-		dept_name = str(df['department'][i])
-		df[dept_name][i] = df['totalQuantity'][i]
-	    
-	df = df.drop('department', axis = 1)
+	def restructure(row):
+		dept_name = str(row['department'])
+		row[dept_name] = row['totalQuantity']
+		return row
+
+	df = df.apply(restructure, axis=1)
+	df = df.drop('department', axis=1)
 	df = df.groupby(['date', 'province', 'city']).sum().reset_index()
 
 	return df
+
 
 # add the weather information to the retail dataset
 def add_weather(city_df, weather_df):
@@ -37,21 +36,35 @@ def add_weather(city_df, weather_df):
                   on = ['date', 'city'])
 
 	result = pd.merge(provinces, result, on = ['city']) # fill in missing province values
-	result = result.rename(columns={"province_x": "province"}).drop("province_y", axis =1)
+	result = result.rename(columns={"province_x": "province"}).drop("province_y", axis=1)
 
-	columnlist = list(result.columns.values.tolist())[3:19]
-	result[columnlist] = result[columnlist].fillna(value=0) # fill the missing transaction records as 0; ~0.05% of data
+	return result
+
+
+def fill_missing(df):
+	# drop columns with more than 80% null values
+	df = df.dropna(thresh=df.shape[0]*0.2, axis=1)
+
+	retailCols = list(df.columns)[:19]
+	weatherCols = list(df.columns)[20:]
+	result = pd.DataFrame()
+
+	# fill the missing transaction records as 0; ~0.05% of data
+	result[retailCols] = df[retailCols].fillna(value=0.0)
+
+	# fill missing weather records with surrounding data
+	result[weatherCols] = df[weatherCols].interpolate(method='nearest', axis=0).ffill().bfill()
 
 	return result
 
 
 def main():
 	# load retail sales data
-	retail_data = pd.read_csv(RETAIL_PATH).drop(["Unnamed: 0", "category", "class", "style", "vendor"], axis=1)
+	retail_data = pd.read_csv(datapath['retail']).drop(["Unnamed: 0", "category", "class", "style", "vendor"], axis=1)
 	retail_data['city'] = retail_data['city'].str.lower()
 
 	# load weather data
-	weather_data = pd.read_csv(WEATHER_PATH).rename(columns={"station_name": "city"}).drop("station_id", axis =1)
+	weather_data = pd.read_csv(datapath['weather']).rename(columns={"station_name": "city"}).drop("station_id", axis=1)
 
 	# create onehot encoding of the department column
 	city_data = create_onehot(retail_data)
@@ -59,8 +72,11 @@ def main():
 	# add weather information
 	combined_df = add_weather(city_data, weather_data)
 
+	# handle missing values
+	final_df = fill_missing(combined_df)
+
 	# store station information in CSV
-	combined_df.to_csv(RETAIL_COMBINED_PATH)
+	final_df.to_csv(datapath['trendcast'])
 
 
 if __name__=='__main__':
