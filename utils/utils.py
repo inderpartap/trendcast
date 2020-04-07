@@ -15,7 +15,10 @@ datapath = {
 	'cities': "data/citynames.csv",
 	'weather': "data/weather_daily.csv",
 	'retail': "data/fashion_retail.csv",
-	'trendcast': 'data/trendcast_dataset.csv'
+	'trendcast': 'data/trendcast_dataset.csv',
+	'date_featurized':'data/date_featurized.csv',
+	'train_data':'data/train_data.csv',
+	'test_data':'data/test_data.csv'
 }
 
 
