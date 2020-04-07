@@ -5,27 +5,24 @@ import csv
 
 
 # Global - API configurations
-config = {
-    'weather': "config/weather_api.json",
-    'keys': "config/api_keys.json"
-}
+config = {"weather": "config/weather_api.json", "keys": "config/api_keys.json"}
 
 datapath = {
-    'stations': "data/stations.csv",
-    'cities': "data/citynames.csv",
-    'weather': "data/weather_daily.csv",
-    'retail': "data/fashion_retail.csv",
-    'trendcast': 'data/trendcast_dataset.csv',
-    'date_featurized': 'data/date_featurized.csv',
-    'train_data': 'data/train_data.csv',
-    'test_data': 'data/test_data.csv'
+    "stations": "data/stations.csv",
+    "cities": "data/citynames.csv",
+    "weather": "data/weather_daily.csv",
+    "retail": "data/fashion_retail.csv",
+    "trendcast": "data/trendcast_dataset.csv",
+    "date_featurized": "data/date_featurized.csv",
+    "train_data": "data/train_data.csv",
+    "test_data": "data/test_data.csv",
 }
 
 
-def load_data(PATH, type='csv'):
+def load_data(PATH, type="csv"):
     df = pd.DataFrame()
     try:
-        df = pd.read_csv(PATH, delimiter=',')
+        df = pd.read_csv(PATH, delimiter=",")
     except:
         print("Exception: Supports only csv file formats.")
     return df
@@ -44,7 +41,7 @@ def json_to_dict(PATH):
 # takes json object and writes to CSV file
 def write_to_csv(json_data, outfile):
     try:
-        fp = open(outfile, 'w')
+        fp = open(outfile, "w")
         output = csv.writer(fp)
 
         # write header
@@ -71,20 +68,20 @@ def unique(df, col):
 
 def send_request(api, end_point, params):
     json = json_to_dict(config[api])
-    url = json['url'] + json[end_point]['end_point']
+    url = json["url"] + json[end_point]["end_point"]
 
     # check if all required parameters are passed
-    for key, val in json[end_point]['params'].items():
-        if(val == True and key not in params):
-            print("ERROR: \"%s\" is a required parameter for this request" % (key))
+    for key, val in json[end_point]["params"].items():
+        if val == True and key not in params:
+            print('ERROR: "%s" is a required parameter for this request' % (key))
             return dict()
 
     # add auth key to parameters
     # TODO: Fetch keys from config in a round-robin fashion
-    keys = json_to_dict(config['keys'])
-    auth_key = keys['1']['api_key']
-    params['key'] = auth_key
+    keys = json_to_dict(config["keys"])
+    auth_key = keys["1"]["api_key"]
+    params["key"] = auth_key
 
     response = requests.get(url=url, params=params).json()
 
-    return response['data']
+    return response["data"]
