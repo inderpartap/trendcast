@@ -55,12 +55,14 @@ def split_train_test_ts(df, startdate, endDate, no_months):
 
 def main():
 
-    trendcast_data = pd.read_csv(datapath["trendcast"]).drop(["Unnamed: 0"], axis=1)
+    trendcast_data = pd.read_csv(datapath["trendcast"]).drop(["Unnamed: 0"],
+                                                             axis=1)
     # trendcast_data = pd.read_csv("trendcast_dataset.txt",sep=",").drop(["Unnamed: 0"], axis=1)
 
     # setting index of the dataframe to date
     df_dateindexed = trendcast_data.set_index("date")
-    df_dateindexed["DateTime"] = pd.to_datetime(df_dateindexed.index, format="%Y-%m-%d")
+    df_dateindexed["DateTime"] = pd.to_datetime(df_dateindexed.index,
+                                                format="%Y-%m-%d")
 
     df_dateindexed = get_date_features(df_dateindexed)
     df_dateindexed = create_weekend_feature(df_dateindexed, "dayOfWeek")
@@ -70,9 +72,8 @@ def main():
     startdate = min(df_dateindexed.index)
     endDate = max(df_dateindexed.index)
 
-    X_train, X_test = split_train_test_ts(
-        df_dateindexed, startdate, endDate, no_months_test_data
-    )
+    X_train, X_test = split_train_test_ts(df_dateindexed, startdate, endDate,
+                                          no_months_test_data)
 
     # saving train and test data
     X_train.to_csv(datapath["train_data"])
