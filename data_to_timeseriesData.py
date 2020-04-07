@@ -1,8 +1,10 @@
+from datetime import datetime
+
+import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
-from datetime import datetime
-import numpy as np
 from sklearn.model_selection import TimeSeriesSplit
+
 from utils.utils import datapath
 
 
