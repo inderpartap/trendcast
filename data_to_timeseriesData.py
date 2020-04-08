@@ -66,9 +66,8 @@ def main():
     startdate = min(trendcast_data.date).strftime("%Y-%m-%d")
     endDate = max(trendcast_data.date).strftime("%Y-%m-%d")
 
-    X_train, X_test = split_train_test_ts(
-        trendcast_data, startdate, endDate, no_months_test_data
-    )
+    X_train, X_test = split_train_test_ts(trendcast_data, startdate, endDate,
+                                          no_months_test_data)
 
     # saving train and test data
     X_train.to_csv(datapath["train_data"])
