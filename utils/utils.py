@@ -1,7 +1,8 @@
-import pandas as pd
-import json
-import requests
 import csv
+import json
+
+import pandas as pd
+import requests
 
 
 # Global - API configurations
