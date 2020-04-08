@@ -60,7 +60,7 @@ def fill_missing(df):
 
 def main():
 	# load retail sales data
-	retail_data = pd.read_csv(datapath['retail']).drop(["Unnamed: 0", "category", "class", "style", "vendor"], axis=1)
+	retail_data = pd.read_csv(datapath['retail'], index_col=0).drop(["category", "class", "style", "vendor"], axis=1)
 	retail_data['city'] = retail_data['city'].str.lower()
 
 	# load weather data
@@ -76,7 +76,7 @@ def main():
 	final_df = fill_missing(combined_df)
 
 	# store station information in CSV
-	final_df.to_csv(datapath['trendcast'])
+	final_df.to_csv(datapath['trendcast'], index=False)
 
 
 if __name__=='__main__':

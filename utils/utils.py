@@ -21,11 +21,45 @@ datapath = {
 	'test_data':'data/test_data.csv'
 }
 
+schema = {
+	'date': 'string',
+	'province': 'string',
+	'city': 'string',
+	'totalQuantity': 'float64',
+	'totalSales':'float64',
+	'department1':'float64',
+	'department2':'float64',
+	'department3':'float64',
+	'department4':'float64',
+	'department5':'float64',
+	'department6':'float64',
+	'department7':'float64',
+	'department8':'float64',
+	'department9':'float64',
+	'department10':'float64',
+	'department11':'float64',
+	'department12':'float64',
+	'department13':'float64',
+	'department14':'float64',
+	'temperature_min':'float64',
+	'temperature_max':'float64',
+	'precipitation':'float64',
+	'winddirection':'float64',
+	'windspeed':'float64',
+	'peakgust':'float64',
+	'pressure':'float64',
+	'year': 'int64',
+	'month': 'int64',
+	'day': 'int64',
+	'dayOfWeek': 'int64',
+	'isWeekend': 'float64'
+}
+
 
 def load_data(PATH, type='csv'):
 	df = pd.DataFrame()
 	try:
-		df = pd.read_csv(PATH, delimiter=',')
+		df = pd.read_csv(PATH, delimiter=',', dtype=schema, parse_dates=['date'], date_parser=pd.to_datetime)
 	except:
 		print("Exception: Supports only csv file formats.")
 	return df

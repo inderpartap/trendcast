@@ -1,12 +1,6 @@
 import pandas as pd
 from utils.utils import *
 
-
-# Fashion Retail Data
-RETAIL_PATH = "data/fashion_retail.csv"
-STATIONS_PATH = "data/stations.csv"
-
-
 # given time-series data and time-defining column-name,
 # returns start and end dates (period)
 def get_period(df, col):
@@ -29,7 +23,7 @@ def fetch_stations(cities):
 
 def main():
 	# load retail sales data
-	retail_data = load_data(RETAIL_PATH, 'csv')
+	retail_data = load_data(datapath['retail'], 'csv')
 	print(retail_data)
 
 	# find start and end dates in dataset
@@ -44,7 +38,7 @@ def main():
 	stations = fetch_stations(cities)
 
 	# store station information in CSV
-	write_to_csv(stations, STATIONS_PATH)
+	write_to_csv(stations, datapath['stations'])
 
 
 if __name__=='__main__':
