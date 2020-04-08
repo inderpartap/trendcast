@@ -18,7 +18,8 @@ def fetch_stations(cities):
     stations = []
     for city in cities:
         response = send_request(
-            api='weather', end_point='stations', params=dict(q=city))
+            api="weather", end_point="stations", params=dict(q=city)
+        )
         stations.extend(response)
 
     return stations
@@ -26,23 +27,23 @@ def fetch_stations(cities):
 
 def main():
     # load retail sales data
-    retail_data = load_data(datapath['retail'], 'csv')
+    retail_data = load_data(datapath["retail"], "csv")
     print(retail_data)
 
     # find start and end dates in dataset
-    (start_date, end_date) = get_period(retail_data, 'date')
+    (start_date, end_date) = get_period(retail_data, "date")
     print(start_date, end_date)
 
     # fetch all cities in the data
-    cities = unique(retail_data, 'city')
+    cities = unique(retail_data, "city")
     print(cities)
 
     # get station IDs for all cities
     stations = fetch_stations(cities)
 
     # store station information in CSV
-    write_to_csv(stations, datapath['stations'])
+    write_to_csv(stations, datapath["stations"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
