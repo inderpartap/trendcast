@@ -46,9 +46,18 @@ def IsNatHoliday(x):
 
 
 def fix_format(df):
-    df = df.rename(columns={"name_x": "IsBlackFriday", "name_y": "IsCyberMonday"})
-    df["IsBlackFriday"] = df["IsBlackFriday"].map({"Black Friday": 1, np.nan: 0})
-    df["IsCyberMonday"] = df["IsCyberMonday"].map({"Cyber Monday": 1, np.nan: 0})
+    df = df.rename(columns={
+        "name_x": "IsBlackFriday",
+        "name_y": "IsCyberMonday"
+    })
+    df["IsBlackFriday"] = df["IsBlackFriday"].map({
+        "Black Friday": 1,
+        np.nan: 0
+    })
+    df["IsCyberMonday"] = df["IsCyberMonday"].map({
+        "Cyber Monday": 1,
+        np.nan: 0
+    })
     df["IsNationalHoliday"] = df["holiday"]
     df = pd.get_dummies(df, columns=["holiday"])
     df["IsNationalHoliday"] = df["IsNationalHoliday"].fillna(0)
