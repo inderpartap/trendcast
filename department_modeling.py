@@ -1,13 +1,15 @@
-import pandas as pd
-from datetime import datetime
-import numpy as np
-from utils.utils import *
-import zipfile
 import os
-from fbprophet import Prophet
-import matplotlib.pyplot as plt
 import pickle
+import zipfile
+from datetime import datetime
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from fbprophet import Prophet
+
 import data_to_timeseriesData as data_to_ts
+from utils.utils import *
 
 
 class Department_Modeling:
