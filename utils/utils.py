@@ -1,5 +1,7 @@
 import csv
 import json
+import pickle
+
 
 import pandas as pd
 import requests
@@ -95,6 +97,17 @@ def write_to_csv(json_data, outfile):
             output.writerow(row.values())
     except:
         print("ERROR: could not open/write CSV")
+
+
+def save_model(model, path):
+    with open(path, 'wb+') as fp:
+        pickle.dump(model, fp)
+
+
+def load_model(model, path):
+    with open(path, "rb+") as fp:
+        model = pickle.load(fp)
+    return model
 
 
 def group(df, col):
