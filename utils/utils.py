@@ -18,7 +18,12 @@ datapath = {
 	'trendcast': 'data/trendcast_dataset.csv',
 	'date_featurized':'data/date_featurized.csv',
 	'train_data':'data/train_data.csv',
-	'test_data':'data/test_data.csv'
+	'test_data':'data/test_data.csv',
+	'department_level_data':'data/department_level.csv'
+}
+
+modelpath = {
+	'department_models': 'models/department_level'
 }
 
 schema = {
