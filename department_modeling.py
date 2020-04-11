@@ -16,7 +16,26 @@ class Department_Modeling:
         Instantiate the prophet model
 
         '''
-        self.model = Prophet()
+        # holidays and special days
+        playoffs = pd.DataFrame({
+            'holiday': 'playoff',
+            'ds': pd.to_datetime(['2014-11-13', '2015-11-12', '2016-11-10', '2017-11-16', '2018-11-15', '2019-11-14',
+                                  '2014-12-26', '2015-11-27', '2016-12-26']),
+            'lower_window': 0,
+            'upper_window': 0,
+        })
+        # additional effect on top of the playoffs
+        # black friday each year
+        superbowls = pd.DataFrame({
+            'holiday': 'superbowl',
+            'ds': pd.to_datetime(['2014-11-13', '2015-11-12', '2016-11-10', '2017-11-16', '2018-11-15', '2019-11-14']),
+            'lower_window': 0,
+            'upper_window': 0,
+        })
+        holidays = pd.concat((playoffs, superbowls))
+        self.model = Prophet(daily_seasonality=True, holidays=holidays)
+        self.model.add_country_holidays(country_name='CA')  # Canada holidays
+
 
     def fit_model(self, df, y, regressors):
         '''
@@ -85,20 +104,20 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
                 if (isWeather):
                     columns_to_drop = ['province', 'city', 'department', 'peakgust', 'pressure',
                                    'temperature_min','temperature_max','winddirection']
-                    regressors = ['totalQuantity', 'temperature']
+                    regressors = ['totalSales', 'temperature']
                 else:
                     columns_to_drop = ['province', 'city', 'department', 'peakgust', 'pressure', 'temperature_min',
                                    'temperature_max','winddirection', 'windspeed', 'precipitation','temperature']
-                    regressors = ['totalQuantity']
+                    regressors = ['totalSales']
                 filtered_df = filtered_df.drop(columns=columns_to_drop)
                 startdate = min(filtered_df.date).strftime('%Y-%m-%d')
                 endDate = max(filtered_df.date).strftime('%Y-%m-%d')
                 X_train, X_test = data_to_ts.split_train_test_ts(filtered_df, startdate, endDate, no_months)
 
                 model_obj = Department_Modeling()
-                fit_model = model_obj.fit_model(X_train, 'totalSales', regressors)
-                pred_vals = fit_model.predict_model_val(X_test, 'totalSales')
-                mae = pred_vals.evaluate_model(X_test,'totalSales')
+                fit_model = model_obj.fit_model(X_train, 'totalQuantity', regressors)
+                pred_vals = fit_model.predict_model_val(X_test, 'totalQuantity')
+                mae = pred_vals.evaluate_model(X_test,'totalQuantity')
                 print("MAE for City {} and Dept {} is {}".format(city, dept, mae))
                 # save model
                 saving_model(model_obj, city + "_" + dept + "_model",isWeather)
