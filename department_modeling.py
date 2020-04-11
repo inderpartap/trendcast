@@ -36,7 +36,7 @@ class Department_Modeling:
         self.fit_model = self.model.fit(df_copy)
         return self
 
-    def predict_model_val(self,X, y):
+    def predict_model_val(self, X, y):
         '''
             Predict output for a dataframe X
 
@@ -58,12 +58,14 @@ class Department_Modeling:
         return mae
 
 
-def saving_model(model, filename,isWeather):
+def saving_model(model, filename, isWeather):
     print("saving model")
     if(isWeather):
-        filesavingpath = modelpath['department_models'] + '/weather/' + filename + '.pckl'
+        filesavingpath = modelpath['department_models'] + \
+            '/weather/' + filename + '.pckl'
     else:
-        filesavingpath = modelpath['department_models'] + '/without_weather/' + filename + '.pckl'
+        filesavingpath = modelpath['department_models'] + \
+            '/without_weather/' + filename + '.pckl'
 
     with open(filesavingpath, 'wb') as fout:
         pickle.dump(model, fout)
@@ -84,30 +86,34 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
             if(len(filtered_df) >= 1000):
                 if (isWeather):
                     columns_to_drop = ['province', 'city', 'department', 'peakgust', 'pressure',
-                                   'temperature_min','temperature_max','winddirection']
+                                       'temperature_min', 'temperature_max', 'winddirection']
                     regressors = ['totalQuantity', 'temperature']
                 else:
                     columns_to_drop = ['province', 'city', 'department', 'peakgust', 'pressure', 'temperature_min',
-                                   'temperature_max','winddirection', 'windspeed', 'precipitation','temperature']
+                                       'temperature_max', 'winddirection', 'windspeed', 'precipitation', 'temperature']
                     regressors = ['totalQuantity']
                 filtered_df = filtered_df.drop(columns=columns_to_drop)
                 startdate = min(filtered_df.date).strftime('%Y-%m-%d')
                 endDate = max(filtered_df.date).strftime('%Y-%m-%d')
-                X_train, X_test = data_to_ts.split_train_test_ts(filtered_df, startdate, endDate, no_months)
+                X_train, X_test = data_to_ts.split_train_test_ts(
+                    filtered_df, startdate, endDate, no_months)
 
                 model_obj = Department_Modeling()
-                fit_model = model_obj.fit_model(X_train, 'totalSales', regressors)
+                fit_model = model_obj.fit_model(
+                    X_train, 'totalSales', regressors)
                 pred_vals = fit_model.predict_model_val(X_test, 'totalSales')
-                mae = pred_vals.evaluate_model(X_test,'totalSales')
+                mae = pred_vals.evaluate_model(X_test, 'totalSales')
                 print("MAE for City {} and Dept {} is {}".format(city, dept, mae))
                 # save model
-                saving_model(model_obj, city + "_" + dept + "_model",isWeather)
+                saving_model(model_obj, city + "_" +
+                             dept + "_model", isWeather)
 
 
 def main():
-    department_df = pd.read_csv(datapath['department_level_data'],parse_dates=['date'], date_parser=pd.to_datetime)
+    department_df = pd.read_csv(datapath['department_level_data'], parse_dates=[
+                                'date'], date_parser=pd.to_datetime)
 
-    #get cities
+    # get cities
     cities_list = department_df['city'].unique()
     # get department list
     department_list = department_df['department'].unique()
