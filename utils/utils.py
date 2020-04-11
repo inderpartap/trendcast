@@ -5,7 +5,6 @@ import pickle
 import pandas as pd
 import requests
 
-
 # Global - API configurations
 config = {"weather": "config/weather_api.json", "keys": "config/api_keys.json"}
 
@@ -126,7 +125,8 @@ def send_request(api, end_point, params):
     # check if all required parameters are passed
     for key, val in json[end_point]["params"].items():
         if val == True and key not in params:
-            print('ERROR: "%s" is a required parameter for this request' % (key))
+            print('ERROR: "%s" is a required parameter for this request' %
+                  (key))
             return dict()
 
     # add auth key to parameters
