@@ -1,8 +1,9 @@
-import pandas as pd
-import json
-import requests
 import csv
+import json
 import pickle
+
+import pandas as pd
+import requests
 
 
 # Global - API configurations
