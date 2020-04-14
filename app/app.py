@@ -1,4 +1,8 @@
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask
+from flask import jsonify
+from flask import redirect
+from flask import render_template
+from flask import request
 from utilities import *
 
 # import dash
