@@ -1,3 +1,72 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7dc6e4467347360bd821c5b3bf290fc56505f04c6f11598e90c29350c4c6f665
-size 2168
+id,country,name
+71872,CA,"Medicine Hat, Alta."
+71138,CA,"Yorkton, Saskatchewan"
+71877,CA,Calgary Airport
+71860,CA,Calgary / Cochrane
+71254,CA,Camrose
+71123,CA,Edmonton Airport
+71155,CA,Edmonton International CS
+71157,CA,Edmonton Municipal CR10
+71121,CA,Edmonton Namao
+CZVL0,CA,Edmonton / Volmer
+71940,CA,"Grande Prairie, Alta."
+71874,CA,"Lethbridge, Alta."
+71243,CA,Lethbridge
+78583,BZ,Belize / Phillip Goldston Intl. Airport
+11082,AT,Gumpoldskirchen
+71258,CA,Olds
+94864,AU,Goldstream Aws
+02267,SE,Ornskoldsvik Airport
+71878,CA,"Red Deer, Alta."
+71289,CA,Stettler / Botha
+70030,US,Wainwright Airport
+71118,CA,Wainwright / Irma
+71205,CA,Campbell River
+71880,CA,"Cranbrook, BC"
+72479,US,Delta
+KAJZ0,US,Delta / North Delta
+KU240,US,Delta
+71563,CA,Delta Marsh / Fulton
+KDUC0,US,Duncan / Dixie Park
+71943,CA,"Fort St John, BC"
+71887,CA,Kamloops
+71741,CA,North Kamloops
+71203,CA,Kelowna Airport
+74598,US,Langley Air Force Base
+PARS0,US,Russian Mission
+71776,CA,Nelson 
+71945,CA,"Fort Nelson, BC"
+NZNS0,NZ,Nelson / Monaco
+94826,AU,Cape Nelson
+95779,AU,Nelson Bay (Nelson Head) / Shoal Bay
+71889,CA,"Penticton, BC"
+71475,CA,"Port Alberni, BC"
+71103,CA,Quesnel Airport
+71779,CA,Quesnel
+71192,CA,Quesnel
+71218,CA,Salmon Arm 
+72561,US,Sidney Municipal Airport
+KSDY0,US,Sidney / Wagon Wheel Trailer Court
+71683,CA,"Trail Valley , N. W. T."
+KBRD0,US,Brainerd / Lazy Acre's Trailer Court
+KCKC0,US,Grand Marais / Pine Mountain Trailer Court
+KSDY0,US,Sidney / Wagon Wheel Trailer Court
+KAIA0,US,Alliance / Meadows Trailer Court
+KFQD0,US,Rutherfordton / Mount Vernon
+KMVN0,US,Mount Vernon / Summersville
+K4I30,US,Mount Vernon-Knox Co / Brandon
+71115,CA,"Vernon, BC"
+KF050,US,Vernon / Hinds
+71785,CA,White Rock
+71104,CA,"Williams Lake, BC"
+71863,CA,"Regina, Saskatchewan"
+71514,CA,Regina University
+71866,CA,Saskatoon Airport
+71513,CA,Saskatoon Kernen
+71870,CA,"Swift Current, Saskatchewan"
+71446,CA,Swift Current 
+74776,US,Marianna / Chipola Terrace
+71951,CA,"Terrace, BC"
+KELO0,US,Ely Municipal Airport / Northern Terrace Mobile Home Park
+KHCO0,US,Hallock / Viking Land Terrace
+KCSG0,US,Columbus / Wayne Terrace
