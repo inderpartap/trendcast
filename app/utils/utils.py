@@ -100,7 +100,7 @@ def write_to_csv(json_data, outfile):
 
 
 def save_model(model, path):
-    with open(path, 'wb+') as fp:
+    with open(path, "wb+") as fp:
         pickle.dump(model, fp)
 
 
@@ -129,8 +129,7 @@ def send_request(api, end_point, params):
     # check if all required parameters are passed
     for key, val in json[end_point]["params"].items():
         if val == True and key not in params:
-            print('ERROR: "%s" is a required parameter for this request' %
-                  (key))
+            print('ERROR: "%s" is a required parameter for this request' % (key))
             return dict()
 
     # add auth key to parameters
