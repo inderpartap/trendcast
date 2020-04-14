@@ -80,7 +80,7 @@
 
         <!--  BEGIN SIDEBAR  -->
         <div class="sidebar-wrapper sidebar-theme">
-            
+
             <nav id="sidebar">
                 <div class="shadow-bottom"></div>
                 <ul class="list-unstyled menu-categories" id="accordionExample">
@@ -103,33 +103,45 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                 </ul>
                 <!-- <div class="shadow-bottom"></div> -->
-                
+
             </nav>
 
         </div>
         <!--  END SIDEBAR  -->
-        
+
         <!--  BEGIN CONTENT AREA  -->
         <div id="content" class="main-content">
             <div class="layout-px-spacing">
 
-                <div class="row layout-top-spacing"> 
-                        <div class="col-lg-6 col-12 mx-auto">
-                            <form class="form-inline justify-content-center" action = "/sales/result" method = "POST">
+                <div class="row layout-top-spacing">
+                        <div class="col-lg-7 col-12 mx-auto">
+                            <form class="form-inline justify-content-center" action = "/predictions/result" method = "POST">
                                 <label class="sr-only" for="inlineFormInputName">Name</label>
                                 <!-- <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName" placeholder="City Name" name = "city">    -->
+                                <div class="col-lg-3 col-12 mx-auto">
                                 <select class="selectpicker" data-live-search="true" name = "city">
-                                        <option>calgary</option>    <option>camrose</option>    <option>cranbrook</option>  <option>edmonton</option>
-                                        <option>fort st john</option>    <option>kamloops</option>    <option>kelowna</option>  <option>lethbridge</option>
-                                        <option>medicine hat</option>    <option>nelson</option>    <option>olds</option>  <option>penticton</option>
-                                        <option>port alberni</option>    <option>quesnel</option>    <option>red deer</option>  <option>regina</option>
-                                        <option>salmon arm</option>    <option>saskatoon</option>    <option>stettler</option>  <option>swift current</option>
-                                        <option>terrace</option>    <option>trail</option>    <option>vernon</option>  <option>wainwright</option>
-                                        <option>white rock</option>    <option>williams lake</option>    <option>yorkton</option>
+                                        <option>Calgary</option>    <option>Camrose</option>    <option>Cranbrook</option>  <option>Edmonton</option>
+                                        <option>Fort St John</option>    <option>Kamloops</option>    <option>Kelowna</option>  <option>Lethbridge</option>
+                                        <option>Medicine Hat</option>    <option>Nelson</option>    <option>Olds</option>  <option>Penticton</option>
+                                        <option>Port Alberni</option>    <option>Quesnel</option>    <option>Red Deer</option>  <option>Regina</option>
+                                        <option>Salmon Arm</option>    <option>Saskatoon</option>    <option>Stettler</option>  <option>Swift Current</option>
+                                        <option>Terrace</option>    <option>Trail</option>    <option>Vernon</option>  <option>Wainwright</option>
+                                        <option>White Rock</option>    <option>Williams lake</option>    <option>Yorkton</option>
                                     </select>
+                                </div>
+                                <div class="col-lg-3 col-12 mx-auto">
+                                <select class="selectpicker" data-live-search="true" name = "department">
+                                        <option>All Departments</option>
+                                        <option>Department 1</option>    <option>Department 2</option>    <option>Department 3</option>
+                                        <option>Department 4</option>    <option>Department 5</option>    <option>Department 6</option>
+                                        <option>Department 7</option>    <option>Department 8</option>    <option>Department 9</option>
+                                        <option>Department 10</option>    <option>Department 11</option>    <option>Department 12</option>
+                                        <option>Department 13</option>    <option>Department 14</option>
+                                    </select>
+                                </div>
                                 <div class="col-lg-3 col-12 mx-auto">
                                 <button type="submit" class="btn btn-primary mb-2">Submit</button>
                                 </div>
@@ -139,9 +151,9 @@
                         {% endblock %}
                 </div>
             </div>
-                     
 
-            
+
+
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
                     <p class="">View full code at <a target="_blank" href="http://github.com/inderpartap/trendcast">Trendcast</a>.</p>
@@ -168,7 +180,7 @@
             App.init();
         });
     </script>
-    <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>  
+    <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
     <script src="{{ url_for('static', filename='plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 

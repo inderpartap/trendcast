@@ -1,3 +1,45 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9094e89713709dd6735e323a6a4a10be25dcdecb74b4a59bc3f7e1c99239ee11
-size 1374
+,province,city,id
+0,AB,medicine hat,['71872']
+1,SK,yorkton,['71138']
+2,AB,calgary,"['71877', '71860']"
+3,AB,camrose,['71254']
+4,AB,edmonton,"['71119', '71121', '71123', '71155', '71157', '71879', '71117', 'CWYC0', 'CZEG0', 'CZVL0']"
+5,AB,grande prairie,['71940']
+6,AB,lethbridge,"['71243', '71874']"
+7,AB,lloydminster,[]
+8,AB,olds,['71258']
+9,AB,red deer,['71878']
+10,AB,sherwood park,[]
+11,AB,st. albert,[]
+12,AB,stettler,['71289']
+13,AB,wainwright,"['CYWV0', '71118']"
+14,BC,campbell river,"['CWAD0', '71205']"
+15,BC,chilliwack,['CYCW0']
+16,BC,clearbrook,[]
+17,BC,courtenay,[]
+18,BC,cranbrook,['71880']
+19,BC,delta,"['71563', '71594']"
+20,BC,duncan,[]
+21,BC,fort st john,['71943']
+22,BC,kamloops,"['71887', '71741']"
+23,BC,kelowna,['71203']
+24,BC,langley,['CYNJ0']
+25,BC,maple ridge,[]
+26,BC,mission,[]
+27,BC,nelson,"['71776', '71945']"
+28,BC,penticton,['71889']
+29,BC,port alberni,['71475']
+30,BC,quesnel,"['71103', '71192', '71779']"
+31,BC,salmon arm,"['71218', 'CZAM0']"
+32,BC,sechelt,[]
+33,BC,sidney,[]
+34,BC,trail,['71683']
+35,BC,vernon,['71115']
+36,BC,westbank,[]
+37,BC,white rock,['71785']
+38,BC,williams lake,['71104']
+39,SK,regina,"['71514', '71863']"
+40,SK,saskatoon,"['71513', '71866']"
+41,SK,swift current,"['71446', '71870']"
+42,BC,terrace,"['71951', 'CWNU0', 'CWSX0', 'CYSS0', '71559', '99597']"
+43,AB,okotoks,[]
