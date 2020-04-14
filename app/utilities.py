@@ -9,6 +9,7 @@ from fbprophet.plot import add_changepoints_to_plot
 from fbprophet.plot import plot_yearly
 
 from utils.utils import *
+
 # facebook prophet
 
 
@@ -51,9 +52,8 @@ def get_weather(dates, cityname):
         params=dict(station=int(city_id), start=start_date, end=end_date),
     )
     response_df = pd.DataFrame(response)
-    dates["temperature"] = response_df[["temperature_min", "temperature_max"]].mean(
-        axis=1
-    )
+    dates["temperature"] = response_df[["temperature_min",
+                                        "temperature_max"]].mean(axis=1)
     return dates
 
 
@@ -103,17 +103,7 @@ def deptlevel(cityname, department):
     df = load_data(cityname)
 
     city_file = str.lower(cityname)
-    path_without_weather = (
-        "../models/department_level/without_weather/"
-        + cityname
-        + "_"
-        + department
-        + "_model.pkl"
-    )
-    path_with_weather = (
-        "../models/department_level/weather/"
-        + cityname
-        + "_"
-        + department
-        + "_model.pkl"
-    )
+    path_without_weather = ("../models/department_level/without_weather/" +
+                            cityname + "_" + department + "_model.pkl")
+    path_with_weather = ("../models/department_level/weather/" + cityname +
+                         "_" + department + "_model.pkl")
