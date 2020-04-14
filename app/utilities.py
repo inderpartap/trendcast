@@ -1,14 +1,15 @@
-import pandas as pd
-import numpy as np
 import json
 import pickle
+
+import numpy as np
+import pandas as pd
 import requests
+from fbprophet import Prophet
+from fbprophet.plot import add_changepoints_to_plot
+from fbprophet.plot import plot_yearly
 
 from utils.utils import *
-
 # facebook prophet
-from fbprophet import Prophet
-from fbprophet.plot import add_changepoints_to_plot, plot_yearly
 
 
 # serializing json data for compatibility with frontend
