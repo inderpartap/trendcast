@@ -2,7 +2,6 @@ import csv
 import json
 import pickle
 
-
 import pandas as pd
 import requests
 
@@ -100,7 +99,7 @@ def write_to_csv(json_data, outfile):
 
 
 def save_model(model, path):
-    with open(path, 'wb+') as fp:
+    with open(path, "wb+") as fp:
         pickle.dump(model, fp)
 
 
