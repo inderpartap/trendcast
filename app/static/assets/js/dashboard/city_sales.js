@@ -147,11 +147,7 @@ try {
       borderColor: "#191e3a",
       strokeDashArray: 5,
       xaxis: { lines: { show: true } },
-      yaxis: {
-        lines: {
-          show: false
-        }
-      },
+      yaxis: { lines: { show: false } },
       padding: { top: 0, right: 0, bottom: 0, left: -10 }
     },
     legend: {
@@ -173,15 +169,7 @@ try {
       },
       itemMargin: { horizontal: 0, vertical: 20 }
     },
-    tooltip: {
-      theme: "dark",
-      marker: {
-        show: true
-      },
-      x: {
-        show: false
-      }
-    },
+    tooltip: { theme: "dark", marker: { show: true }, x: { show: false } },
     fill: {
       type: "gradient",
       gradient: {
@@ -193,16 +181,7 @@ try {
         stops: [45, 100]
       }
     },
-    responsive: [
-      {
-        breakpoint: 575,
-        options: {
-          legend: {
-            offsetY: -30
-          }
-        }
-      }
-    ]
+    responsive: [{ breakpoint: 575, options: { legend: { offsetY: -30 } } }]
   };
 
   /*
