@@ -189,7 +189,7 @@ def main():
     make_city_dept_models(cities_list,
                           department_list,
                           department_df,
-                          isWeather=False)
+                          isWeather=True)
 
 
 if __name__ == "__main__":
