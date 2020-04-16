@@ -2,11 +2,13 @@ import os
 import pickle
 import zipfile
 from datetime import datetime
+from statistics import mean
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from fbprophet import Prophet
+from sklearn.metrics import mean_squared_error
 
 import data_to_timeseriesData as data_to_ts
 from utils.utils import *
@@ -98,8 +100,13 @@ class Department_Modeling:
 
         X_orig = X_orig.reset_index().drop(columns=["date"])
         print(self.forecast_vals["yhat"])
+        np.nan_to_num(self.forecast_vals["yhat"],
+                      posinf=np.inf,
+                      neginf=-np.inf)
+        rmse = mean_squared_error(y_true=X_orig[y_orig],
+                                  y_pred=self.forecast_vals["yhat"])
         mae = abs(self.forecast_vals["yhat"] - X_orig[y_orig]).mean()
-        return mae
+        return (mae, rmse)
 
 
 def saving_model(model, filename, isWeather):
@@ -122,12 +129,20 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
     # split into train and test
 
     no_months = 3
+    startdate = min(df.date).strftime("%Y-%m-%d")
+    endDate = max(df.date).strftime("%Y-%m-%d")
+    X_train, X_test = data_to_ts.split_train_test_ts(df, startdate, endDate,
+                                                     no_months)
+    avg_loss = []
 
     for city in cities_list:
         for dept in department_list:
-            filtered_df = df[(df["city"] == city) & (df["department"] == dept)]
+            filtered_train_df = X_train[(X_train["city"] == city)
+                                        & (X_train["department"] == dept)]
+            filtered_test_df = X_test[(X_test["city"] == city)
+                                      & (X_test["department"] == dept)]
             # define a threshold
-            if len(filtered_df) >= 1000:
+            if len(filtered_train_df) >= 1000:
                 if isWeather:
                     columns_to_drop = [
                         "province",
@@ -139,7 +154,7 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
                         "temperature_max",
                         "winddirection",
                     ]
-                    regressors = ["totalSales", "temperature"]
+                    regressors = ["temperature"]
                 else:
                     columns_to_drop = [
                         "province",
@@ -154,24 +169,34 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
                         "precipitation",
                         "temperature",
                     ]
-                    regressors = ["totalSales"]
-                filtered_df = filtered_df.drop(columns=columns_to_drop)
-                startdate = min(filtered_df.date).strftime("%Y-%m-%d")
-                endDate = max(filtered_df.date).strftime("%Y-%m-%d")
-                X_train, X_test = data_to_ts.split_train_test_ts(
-                    filtered_df, startdate, endDate, no_months)
+                    regressors = []
+                filtered_train_df = filtered_train_df.drop(
+                    columns=columns_to_drop)
+                filtered_test_df = filtered_test_df.drop(
+                    columns=columns_to_drop)
 
                 model_obj = Department_Modeling()
-                fit_model = model_obj.fit_model(X_train, "totalQuantity",
-                                                regressors)
+                fit_model = model_obj.fit_model(filtered_train_df,
+                                                "totalQuantity", regressors)
                 pred_vals = fit_model.predict_model_val(
-                    X_test, "totalQuantity")
-                mae = pred_vals.evaluate_model(X_test, "totalQuantity")
+                    filtered_test_df, "totalQuantity")
+                (mae, rmse) = pred_vals.evaluate_model(filtered_test_df,
+                                                       "totalQuantity")
                 print("MAE for City {} and Dept {} is {}".format(
                     city, dept, mae))
+                print("RMSE for City {} and Dept {} is {}".format(
+                    city, dept, rmse))
                 # save model
+                avg_loss.append(rmse)
                 saving_model(model_obj, city + "_" + dept + "_model",
                              isWeather)
+
+    if isWeather:
+        text = "with weather"
+    else:
+        text = "without weather"
+    print("Average Loss across all cities and departments for model {} is {}".
+          format(text, mean(avg_loss.mean)))
 
 
 def main():
@@ -189,7 +214,7 @@ def main():
     make_city_dept_models(cities_list,
                           department_list,
                           department_df,
-                          isWeather=True)
+                          isWeather=False)
 
 
 if __name__ == "__main__":
