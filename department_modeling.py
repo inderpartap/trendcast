@@ -2,13 +2,14 @@ import os
 import pickle
 import zipfile
 from datetime import datetime
+from statistics import mean
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from fbprophet import Prophet
 from sklearn.metrics import mean_squared_error
-from statistics import mean
+
 import data_to_timeseriesData as data_to_ts
 from utils.utils import *
 
