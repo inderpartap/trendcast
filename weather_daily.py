@@ -23,16 +23,15 @@ def weather_daily(city_id_name_df, retail_df):
     daily_data = []
     for index, val_id in enumerate(station_ids):
         # get start and end date for a particular station
-        filtered_retail_data = retail_df[retail_df["city"].str.contains(
-            station_names[index], case=False)]
+        filtered_retail_data = retail_df[
+            retail_df["city"].str.contains(station_names[index], case=False)
+        ]
         (start_date, end_date) = get_period(filtered_retail_data, "date")
         if not math.isnan(val_id):
             response = send_request(
                 api="weather",
                 end_point="daily",
-                params=dict(station=int(val_id),
-                            start=start_date,
-                            end=end_date),
+                params=dict(station=int(val_id), start=start_date, end=end_date),
             )
             for resp_obj in response:
                 resp_obj["station_id"] = int(val_id)
@@ -49,9 +48,9 @@ def get_city_ids(city_data):
     cleaned_data = []
     # getting sation_id corresponding to city_name present in the the original_csv
     for city in city_names:
-        response = send_request(api="weather",
-                                end_point="stations",
-                                params=dict(q=city))
+        response = send_request(
+            api="weather", end_point="stations", params=dict(q=city)
+        )
         city_id = ""
         if len(response) > 0:
             for resp_val in response:
