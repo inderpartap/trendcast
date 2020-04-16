@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from fbprophet import Prophet
-
+from sklearn.metrics import mean_squared_error
+from statistics import mean
 import data_to_timeseriesData as data_to_ts
 from utils.utils import *
 
@@ -98,8 +99,10 @@ class Department_Modeling:
 
         X_orig = X_orig.reset_index().drop(columns=["date"])
         print(self.forecast_vals["yhat"])
+        np.nan_to_num(self.forecast_vals['yhat'], posinf=np.inf, neginf=-np.inf)
+        rmse = mean_squared_error(y_true=X_orig[y_orig], y_pred=self.forecast_vals['yhat'])
         mae = abs(self.forecast_vals["yhat"] - X_orig[y_orig]).mean()
-        return mae
+        return (mae,rmse)
 
 
 def saving_model(model, filename, isWeather):
@@ -126,6 +129,7 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
     endDate = max(df.date).strftime('%Y-%m-%d')
     X_train, X_test = data_to_ts.split_train_test_ts(
          df, startdate, endDate, no_months)
+    avg_loss = []
 
     for city in cities_list:
         for dept in department_list:
@@ -144,7 +148,7 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
                         "temperature_max",
                         "winddirection",
                     ]
-                    regressors = ["totalSales", "temperature"]
+                    regressors = ["temperature"]
                 else:
                     columns_to_drop = [
                         "province",
@@ -159,7 +163,7 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
                         "precipitation",
                         "temperature",
                     ]
-                    regressors = ["totalSales"]
+                    regressors = []
                 filtered_train_df = filtered_train_df.drop(columns=columns_to_drop)
                 filtered_test_df = filtered_test_df.drop(columns=columns_to_drop)
 
@@ -168,12 +172,21 @@ def make_city_dept_models(cities_list, department_list, df, isWeather):
                                                 regressors)
                 pred_vals = fit_model.predict_model_val(
                     filtered_test_df, "totalQuantity")
-                mae = pred_vals.evaluate_model(filtered_test_df, "totalQuantity")
+                (mae,rmse) = pred_vals.evaluate_model(filtered_test_df, "totalQuantity")
                 print("MAE for City {} and Dept {} is {}".format(
                     city, dept, mae))
+                print("RMSE for City {} and Dept {} is {}".format(
+                    city, dept, rmse))
                 # save model
+                avg_loss.append(rmse)
                 saving_model(model_obj, city + "_" + dept + "_model",
                              isWeather)
+
+    if(isWeather):
+        text = "with weather"
+    else:
+        text = "without weather"
+    print("Average Loss across all cities and departments for model {} is {}".format(text,mean(avg_loss.mean)))
 
 
 def main():
