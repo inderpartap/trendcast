@@ -79,8 +79,8 @@ def saveFileasCSV(filename, df, headers):
 
 def main():
 
-    retail_data = load_data(RETAIL_PATH, "csv")
-    city_data = load_data(CITY_PATH, "csv")
+    retail_data = pd.read_csv(RETAIL_PATH, delimiter=",")
+    city_data = pd.read_csv(CITY_PATH, delimiter=",")
 
     # create cleaned station_ids with city names
     # uncomment to generate file
