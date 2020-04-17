@@ -1,10 +1,13 @@
 <h1 align="center">Welcome to Trendcast 👋</h1>
 <p align="center">
-
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
-![GitHub repo size](https://img.shields.io/github/repo-size/inderpartap/trendcast)
-
-</p>
+	<a href="https://www.python.org/" alt="Made with Python">
+		<img src="http://ForTheBadge.com/images/badges/made-with-python.svg" />
+	</a>
+	<br>
+		<a href="https://github.com/inderpartap/trendcast" alt="Trendcast Repo Size">
+			<img src="https://img.shields.io/github/repo-size/inderpartap/trendcast" />
+		</a>
+	</p>
 
 > Exploring the Impact of Weather on Short-time Demand Forecast for Fashion
 > Retailers.<br /> Our `Dashboard` will predict your inventory requirements with
@@ -12,8 +15,13 @@
 
 ## ✨ Demo
 
-Our live working demo can be viewed at -
-[page](https://github.com/inderpartap/trendcast)
+Go to the app folder and run:
+
+```sh
+python app.py
+```
+
+Make sure to install the requirements before you start the flask app.
 
 ## 🚀 Development Setup
 

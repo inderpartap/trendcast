@@ -35,8 +35,8 @@ def sales_predictions():
     if request.method == "POST":
         cityname = request.form.getlist("city")[0]
         department = request.form.getlist("department")[0]
-        department = str.lower(department.replace(" ", ""))
-        if department == "alldepartments":
+        department_lower = str.lower(department.replace(" ", ""))
+        if department_lower == "alldepartments":
             data_base, data_weather = citylevel(cityname)
             return render_template(
                 "city_predictions.html",
@@ -45,10 +45,11 @@ def sales_predictions():
                 city=cityname,
             )
         else:
-            data_base, data_weather = deptlevel(cityname, department)
+            data_base, data_weather = deptlevel(cityname, department_lower)
             return render_template(
                 "dept_predictions.html",
-                result=data,
+                result_base=data_base,
+                result_weather=data_weather,
                 city=cityname,
                 department=department,
             )
