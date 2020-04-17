@@ -68,8 +68,7 @@ def load_data(PATH, type="csv"):
             parse_dates=["date"],
             date_parser=pd.to_datetime,
         )
-    except e:
-        print(e)
+    except:
         df = pd.DataFrame()
         print("Exception: Supports only csv file formats.")
     return df
