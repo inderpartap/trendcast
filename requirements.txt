@@ -1,0 +1,14 @@
+dnspython
+fbprophet==0.6
+Flask==1.1.1
+Flask-Compress==1.4.0
+gunicorn
+Jinja2==2.10.3
+numpy==1.17.5
+numpydoc==0.9.2
+pandas==0.25.3
+requests==2.22.0
+unicodecsv==0.14.1
+urllib3==1.25.7
+webencodings==0.5.1
+Werkzeug==0.16.0
