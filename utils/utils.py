@@ -64,9 +64,9 @@ def load_data(PATH, type="csv"):
         df = pd.read_csv(
             PATH,
             delimiter=","
-            #dtype=schema,
-            #parse_dates=["date"],
-            #date_parser=pd.to_datetime,
+            # dtype=schema,
+            # parse_dates=["date"],
+            # date_parser=pd.to_datetime,
         )
     except:
         print("Exception: Supports only csv file formats.")
