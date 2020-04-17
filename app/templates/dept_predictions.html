@@ -1,0 +1,30 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="widget widget-chart-one">
+        <div class="widget-heading">
+            <h5 class="">Total Quantity for - {{department}} in {{city}}</h5>
+        </div>
+
+        <div class="widget-content">
+            <div class="tabs tab-content">
+                <div id="content_1" class="tabcontent">
+                    <div id="retailquantity"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chartfiles %}
+    <script type="text/javascript">
+        var date = JSON.parse('{{result_base["ds"] | tojson}}');
+        var city = '{{ city }}';
+        var totalQty_base = JSON.parse('{{result_base["yhat"] | tojson}}');
+        var totalQty_weather = JSON.parse('{{result_weather["yhat"] | tojson}}');
+        </script>
+    <script src="{{ url_for('static', filename='plugins/apex/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/dashboard/dept_quantity.js') }}"></script>
+{% endblock %}
