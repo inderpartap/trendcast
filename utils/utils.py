@@ -24,9 +24,9 @@ datapath = {
 modelpath = {"department_models": "models/department_level"}
 
 schema = {
-    "date": "string",
-    "province": "string",
-    "city": "string",
+    "date": "str",
+    "province": "str",
+    "city": "str",
     "totalQuantity": "float64",
     "totalSales": "float64",
     "department1": "float64",
@@ -59,7 +59,7 @@ schema = {
 
 
 def load_data(PATH, type="csv"):
-    df = pd.DataFrame()
+    
     try:
         df = pd.read_csv(
             PATH,
@@ -68,7 +68,9 @@ def load_data(PATH, type="csv"):
             parse_dates=["date"],
             date_parser=pd.to_datetime,
         )
-    except:
+    except e:
+        print(e)
+        df = pd.DataFrame()
         print("Exception: Supports only csv file formats.")
     return df
 
