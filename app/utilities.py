@@ -139,7 +139,7 @@ def deptlevel(cityname, department):
     path_without_weather = ("../models/department_level/without_weather/" +
                             city_file + "_" + department + "_model.pkl")
     path_with_weather = ("../models/department_level/weather/" + city_file +
-                         "_" + department + "_model.pkl")
+                         "_" + department + "_model.pckl")
 
     base_pred, weather_pred = get_predictions(cityname, path_without_weather, path_with_weather)
 
