@@ -54,9 +54,8 @@ def get_weather(dates, cityname):
     df = df[df["name"] == str.lower(cityname)]
     city_id = df["station_id"].iat[-1]
 
-    str_date = dates["ds"].apply(
-        lambda x: x.strftime("%Y-%m-%d")
-    )  # convert datetime to string
+    str_date = dates["ds"].apply(lambda x: x.strftime("%Y-%m-%d")
+                                 )  # convert datetime to string
     start_date = str_date.head(1)
     end_date = str_date.tail(1)
 
@@ -66,17 +65,21 @@ def get_weather(dates, cityname):
         params=dict(station=int(city_id), start=start_date, end=end_date),
     )
     response_df = pd.DataFrame(response)
-    weather_df = pd.merge(
-        pd.DataFrame(str_date), response_df, left_on="ds", right_on="date", how="left"
-    )  # join based on the dates
+    weather_df = pd.merge(pd.DataFrame(str_date),
+                          response_df,
+                          left_on="ds",
+                          right_on="date",
+                          how="left")  # join based on the dates
     weather_df = weather_df[["ds", "temperature"]]
-    weather_df["temperature"] = (
-        weather_df["temperature"].interpolate(method="nearest", axis=0).ffill().bfill()
-    )  # fill in missing values
+    weather_df["temperature"] = (weather_df["temperature"].interpolate(
+        method="nearest", axis=0).ffill().bfill())  # fill in missing values
     return weather_df
 
 
-def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=None):
+def get_predictions(cityname,
+                    path_without_weather,
+                    path_with_weather,
+                    cityflag=None):
     df = load_data(cityname)
     df["y"] = 0
     temp = df[["ds", "y"]]  # get the last 2 dates of the city records
@@ -146,9 +149,10 @@ def citylevel(cityname):
     path_without_weather = "../models/sales/without_weather/" + city_file + ".pkl"
     path_with_weather = "../models/sales/weather/" + city_file + ".pkl"
 
-    base_pred, weather_pred = get_predictions(
-        cityname, path_without_weather, path_with_weather, cityflag=1
-    )
+    base_pred, weather_pred = get_predictions(cityname,
+                                              path_without_weather,
+                                              path_with_weather,
+                                              cityflag=1)
 
     return base_pred, weather_pred
 
@@ -159,23 +163,12 @@ def citylevel(cityname):
 def deptlevel(cityname, department):
     # generate pathnames for models
     city_file = str.lower(cityname.replace(" ", "_"))
-    path_without_weather = (
-        "../models/department_level/without_weather/"
-        + city_file
-        + "_"
-        + department
-        + "_model.pkl"
-    )
-    path_with_weather = (
-        "../models/department_level/weather/"
-        + city_file
-        + "_"
-        + department
-        + "_model.pkl"
-    )
+    path_without_weather = ("../models/department_level/without_weather/" +
+                            city_file + "_" + department + "_model.pkl")
+    path_with_weather = ("../models/department_level/weather/" + city_file +
+                         "_" + department + "_model.pkl")
 
-    base_pred, weather_pred = get_predictions(
-        cityname, path_without_weather, path_with_weather
-    )
+    base_pred, weather_pred = get_predictions(cityname, path_without_weather,
+                                              path_with_weather)
 
     return base_pred, weather_pred
