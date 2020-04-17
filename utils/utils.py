@@ -59,7 +59,7 @@ schema = {
 
 
 def load_data(PATH, type="csv"):
-    
+
     try:
         df = pd.read_csv(
             PATH,
