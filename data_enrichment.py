@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from utils.utils import *
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -64,6 +64,29 @@ def fix_format(df):
     df["IsNationalHoliday"] = df["IsNationalHoliday"].apply(IsNatHoliday)
     return df
 
+def split_train_test_ts(df,startdate,endDate,no_months):
+
+    #sorting the index to split the data based on dates
+    df['Date']= df.date
+    df = df.set_index('date').sort_index()
+
+    #creating datetime obj
+    datetime_obj = datetime.strptime(endDate, '%Y-%m-%d')
+
+    new_year = datetime_obj.year
+    new_month = (datetime_obj.month - no_months)%12
+    if(no_months >= datetime_obj.month):
+        new_year = datetime_obj.year -1
+
+    #getting the start date for test data
+    test_data_startdate = datetime(new_year,new_month,1).strftime('%Y-%m-%d')
+
+    #splitting 
+    df=df.rename(columns={'Date':'date'})
+    X_train = df.loc[startdate:test_data_startdate,:]
+    X_test = df.loc[test_data_startdate:endDate,:]
+
+    return(X_train,X_test)
 
 def main():
     # Add the directory of the following data!
@@ -97,7 +120,19 @@ def main():
     df = add_events(df, df_canh)
 
     df = fix_format(df)
-    df.to_csv(output_directory, index=False)
+    
+    #Splitting the data back to training and testing!
+    no_months_test_data =3
+    startdate = min(df.date).strftime('%Y-%m-%d')
+    endDate = max(df.date).strftime('%Y-%m-%d')
+
+    X_train,X_test = split_train_test_ts(df,startdate,endDate,no_months_test_data)
+
+    #saving train and test data
+    X_train.to_csv(datapath['train_data'],index=False) #
+    X_test.to_csv(datapath['test_data'],index=False)  #
+
+    #df.to_csv(output_directory, index=False)
 
 
 if __name__ == "__main__":
