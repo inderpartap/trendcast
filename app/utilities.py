@@ -22,6 +22,8 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 # load and return data only for that city
+
+
 def load_data(city):
     city = str.lower(city)
     df = pd.read_csv("../data/end_dates.csv")
@@ -29,6 +31,8 @@ def load_data(city):
     return df
 
 # to show timeseries for the given city
+
+
 def static_data(cityname):
     city = str.lower(cityname)
     df = pd.read_csv("../data/trendcast_dataset.csv")
@@ -40,12 +44,15 @@ def static_data(cityname):
     return unser
 
 # get the weather data for the dates provided
+
+
 def get_weather(dates, cityname):
     df = pd.read_csv("../data/city_id_names.csv")
     df = df[df["name"] == str.lower(cityname)]
     city_id = df["station_id"].iat[-1]
 
-    str_date = dates["ds"].apply(lambda x: x.strftime("%Y-%m-%d"))	# convert datetime to string
+    str_date = dates["ds"].apply(lambda x: x.strftime(
+        "%Y-%m-%d"))  # convert datetime to string
     start_date = str_date.head(1)
     end_date = str_date.tail(1)
 
@@ -55,15 +62,18 @@ def get_weather(dates, cityname):
         params=dict(station=int(city_id), start=start_date, end=end_date),
     )
     response_df = pd.DataFrame(response)
-    weather_df = pd.merge(pd.DataFrame(str_date), response_df, left_on='ds', right_on='date', how = 'left') # join based on the dates
+    weather_df = pd.merge(pd.DataFrame(str_date), response_df, left_on='ds',
+                          right_on='date', how='left')  # join based on the dates
     weather_df = weather_df[['ds', 'temperature']]
-    weather_df['temperature'] = weather_df['temperature'].interpolate(method='nearest', axis=0).ffill().bfill() # fill in missing values
+    weather_df['temperature'] = weather_df['temperature'].interpolate(
+        method='nearest', axis=0).ffill().bfill()  # fill in missing values
     return weather_df
+
 
 def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=None):
     df = load_data(cityname)
     df["y"] = 0
-    temp = df[["ds", "y"]] # get the last 2 dates of the city records
+    temp = df[["ds", "y"]]  # get the last 2 dates of the city records
 
     m = Prophet()
     m.fit(temp)
@@ -71,7 +81,7 @@ def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=
     dates = m.make_future_dataframe(periods=7)
     dates = dates.drop([0, 1]).reset_index(drop=True)   # get the next 7 dates
 
-    data = get_weather(dates, cityname) # get weather information
+    data = get_weather(dates, cityname)  # get weather information
 
     # get predictions without weather
     dates_only = pd.DataFrame(data["ds"])
@@ -110,7 +120,7 @@ def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=
         output["ds"] = output["ds"].apply(lambda x: x.strftime("%Y.%m.%d"))
         ser = json.dumps(output, cls=JSONEncoder)
         unser_base = json.loads(ser)
-        
+
         # get predictions with weather
         w_weather_model = Department_Modeling()
         try:
@@ -128,17 +138,22 @@ def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=
     return unser_base, unser_weather
 
 # get city level model predictions
+
+
 def citylevel(cityname):
-	# generate pathnames for models
+        # generate pathnames for models
     city_file = str.lower(cityname.replace(" ", "_"))
     path_without_weather = "../models/sales/without_weather/" + city_file + ".pkl"
     path_with_weather = "../models/sales/weather/" + city_file + ".pkl"
 
-    base_pred, weather_pred = get_predictions(cityname, path_without_weather, path_with_weather, cityflag = 1)
+    base_pred, weather_pred = get_predictions(
+        cityname, path_without_weather, path_with_weather, cityflag=1)
 
     return base_pred, weather_pred
 
 # get department level model predictions
+
+
 def deptlevel(cityname, department):
     # generate pathnames for models
     city_file = str.lower(cityname.replace(" ", "_"))
@@ -147,6 +162,7 @@ def deptlevel(cityname, department):
     path_with_weather = ("../models/department_level/weather/" + city_file +
                          "_" + department + "_model.pckl")
 
-    base_pred, weather_pred = get_predictions(cityname, path_without_weather, path_with_weather)
+    base_pred, weather_pred = get_predictions(
+        cityname, path_without_weather, path_with_weather)
 
     return base_pred, weather_pred

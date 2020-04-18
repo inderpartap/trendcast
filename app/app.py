@@ -57,8 +57,8 @@ def sales_predictions():
             else:
                 return render_template(
                     "no_model.html",
-                    city = cityname,
-                    department = department
+                    city=cityname,
+                    department=department
                 )
 
 
