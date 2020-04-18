@@ -64,9 +64,10 @@ departments = [
 @app.route("/sales")
 def index():
     default = "Calgary"
-    return render_template(
-        "base1.html", cities=cities, default=default, message="Static Sales Dashboard"
-    )
+    return render_template("base1.html",
+                           cities=cities,
+                           default=default,
+                           message="Static Sales Dashboard")
 
 
 @app.route("/predictions")
