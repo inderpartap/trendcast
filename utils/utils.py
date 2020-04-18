@@ -2,7 +2,6 @@ import csv
 import json
 import pickle
 
-
 import pandas as pd
 import requests
 
@@ -24,9 +23,9 @@ datapath = {
 modelpath = {"department_models": "models/department_level"}
 
 schema = {
-    "date": "string",
-    "province": "string",
-    "city": "string",
+    "date": "str",
+    "province": "str",
+    "city": "str",
     "totalQuantity": "float64",
     "totalSales": "float64",
     "department1": "float64",
@@ -59,7 +58,7 @@ schema = {
 
 
 def load_data(PATH, type="csv"):
-    df = pd.DataFrame()
+
     try:
         df = pd.read_csv(
             PATH,
@@ -69,6 +68,7 @@ def load_data(PATH, type="csv"):
             date_parser=pd.to_datetime,
         )
     except:
+        df = pd.DataFrame()
         print("Exception: Supports only csv file formats.")
     return df
 
@@ -100,7 +100,7 @@ def write_to_csv(json_data, outfile):
 
 
 def save_model(model, path):
-    with open(path, 'wb+') as fp:
+    with open(path, "wb+") as fp:
         pickle.dump(model, fp)
 
 
