@@ -55,9 +55,9 @@ def sales_predictions():
                     department=department,
                 )
             else:
-                return render_template("no_model.html",
-                                       city=cityname,
-                                       department=department)
+                return render_template(
+                    "no_model.html", city=cityname, department=department
+                )
 
 
 @app.errorhandler(404)
