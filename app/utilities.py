@@ -96,9 +96,13 @@ def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=
         output["yhat"] = np.exp(output["yhat"])
         ser = json.dumps(output, cls=JSONEncoder)
         unser_weather = json.loads(ser)
+
     else:
         wo_weather_model = Department_Modeling()
-        wo_weather_model = pickle.load(open(path_without_weather, "rb"))
+        try:
+            wo_weather_model = pickle.load(open(path_without_weather, "rb"))
+        except:
+            return None, None
         predictions_base = wo_weather_model.model.predict(dates_only)
 
         output = predictions_base[["ds", "yhat"]]
@@ -109,7 +113,10 @@ def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=
         
         # get predictions with weather
         w_weather_model = Department_Modeling()
-        w_weather_model = pickle.load(open(path_with_weather, "rb"))
+        try:
+            w_weather_model = pickle.load(open(path_with_weather, "rb"))
+        except:
+            return None, None
         predictions_weather = w_weather_model.model.predict(data)
 
         output = predictions_weather[["ds", "yhat"]]
@@ -117,7 +124,6 @@ def get_predictions(cityname, path_without_weather, path_with_weather, cityflag=
         output["yhat"] = np.exp(output["yhat"])
         ser = json.dumps(output, cls=JSONEncoder)
         unser_weather = json.loads(ser)
-
 
     return unser_base, unser_weather
 
