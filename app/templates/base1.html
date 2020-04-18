@@ -118,14 +118,10 @@
                     <form class="justify-content-center" action = "/sales/result" method = "POST">
                         <div class="row layout-top-spacing">
                             <div class="col-md-3">
-                                <select class="selectpicker" data-live-search="true" name = "city">
-                                        <option>Calgary</option>    <option>Camrose</option>    <option>Cranbrook</option>  <option>Edmonton</option>
-                                        <option>Fort St John</option>    <option>Kamloops</option>    <option>Kelowna</option>  <option>Lethbridge</option>
-                                        <option>Medicine Hat</option>    <option>Nelson</option>    <option>Olds</option>  <option>Penticton</option>
-                                        <option>Port Alberni</option>    <option>Quesnel</option>    <option>Red Deer</option>  <option>Regina</option>
-                                        <option>Salmon Arm</option>    <option>Saskatoon</option>    <option>Stettler</option>  <option>Swift Current</option>
-                                        <option>Terrace</option>    <option>Trail</option>    <option>Vernon</option>  <option>Wainwright</option>
-                                        <option>White Rock</option>    <option>Williams lake</option>    <option>Yorkton</option>
+                                <select class="selectpicker" data-live-search="true" name = "city" method="GET" action="/">
+                                        {% for city in cities %}
+                                            <option value="{{city}}" {% if value == default %} selected {% endif %}>{{city}}</option>
+                                        {% endfor %}
                                     </select>
                             </div>
                             <div class="col-md-3">
@@ -163,8 +159,21 @@
     <script src="{{ url_for('static', filename='plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
     <script>
+
         $(document).ready(function() {
+
+            // ajax call to update only the chart
+            $('form').on('submit',function (event){
+                $.ajax({
+                    data: {"check":""},
+                    type : 'POST',
+                    url : '/result'
+                }).done(function(data){
+                });
+                event.preventDefault();
+            });
             App.init();
+
         });
     </script>
     <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>

@@ -118,24 +118,17 @@
                             <form class="justify-content-center" action = "/predictions/result" method = "POST">
                                 <div class="row layout-top-spacing">
                                 <div class="col-md-3">
-                                <select class="selectpicker" data-live-search="true" name = "city">
-                                        <option>Calgary</option>    <option>Camrose</option>    <option>Cranbrook</option>  <option>Edmonton</option>
-                                        <option>Fort St John</option>    <option>Kamloops</option>    <option>Kelowna</option>  <option>Lethbridge</option>
-                                        <option>Medicine Hat</option>    <option>Nelson</option>    <option>Olds</option>  <option>Penticton</option>
-                                        <option>Port Alberni</option>    <option>Quesnel</option>    <option>Red Deer</option>  <option>Regina</option>
-                                        <option>Salmon Arm</option>    <option>Saskatoon</option>    <option>Stettler</option>  <option>Swift Current</option>
-                                        <option>Terrace</option>    <option>Trail</option>    <option>Vernon</option>  <option>Wainwright</option>
-                                        <option>White Rock</option>    <option>Williams lake</option>    <option>Yorkton</option>
+                                <select class="selectpicker" data-live-search="true" name = "city" method="GET" action="/">
+                                        {% for city in cities %}
+                                            <option value="{{city}}" >{{city}}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                <select class="selectpicker" data-live-search="true" name = "department">
-                                        <option>All Departments</option>
-                                        <option>Department 1</option>    <option>Department 2</option>    <option>Department 3</option>
-                                        <option>Department 4</option>    <option>Department 5</option>    <option>Department 6</option>
-                                        <option>Department 7</option>    <option>Department 8</option>    <option>Department 9</option>
-                                        <option>Department 10</option>    <option>Department 11</option>    <option>Department 12</option>
-                                        <option>Department 13</option>    <option>Department 14</option>
+                                <select class="selectpicker" data-live-search="true" name = "department" method="GET" action="/">
+                                    {% for dept in departments %}
+                                        <option value="{{dept}}" >{{dept}}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -176,6 +169,17 @@
     <script>
         $(document).ready(function() {
             App.init();
+            // ajax call to update only the chart
+            $('form').on('submit',function (event){
+                $.ajax({
+                    data: {"check":""},
+                    type : 'POST',
+                    url : '/result'
+                }).done(function(data){
+
+                });
+                event.preventDefault();
+            });
         });
     </script>
     <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
