@@ -1,15 +1,15 @@
 {% extends "base2.html" %}
 
 {% block content %}
-<div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">                     
+<div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                         <div class="widget widget-account-invoice-one">
                             <div class="widget-content">
-                                <div class="invoice-box">                                  
+                                <div class="invoice-box">
                                     <div class="acc-total-info">
                                         <h5 style = "color: #e95f2b;">No model exists for {{department}} in {{city}}!</h5>
                                         <p style="text-align: center;">This could be due to less data or low accuracy</p>
                                     </div>
-                                    <div class="inv-detail">                                        
+                                    <div class="inv-detail">
                                         <div class="info-detail-3 info-sub">
                                             <div class="info-detail-sub">
                                                 <p>Model file would be generated once sufficient accuracy is achieved</p>
@@ -23,6 +23,6 @@
 {% endblock %}
 
 {% block chartfiles %}
-    
+
     <script src="{{ url_for('static', filename='plugins/apex/apexcharts.min.js') }}"></script>
 {% endblock %}
