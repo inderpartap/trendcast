@@ -48,9 +48,18 @@ def IsNatHoliday(x):
 
 
 def fix_format(df):
-    df = df.rename(columns={"name_x": "IsBlackFriday", "name_y": "IsCyberMonday"})
-    df["IsBlackFriday"] = df["IsBlackFriday"].map({"Black Friday": 1, np.nan: 0})
-    df["IsCyberMonday"] = df["IsCyberMonday"].map({"Cyber Monday": 1, np.nan: 0})
+    df = df.rename(columns={
+        "name_x": "IsBlackFriday",
+        "name_y": "IsCyberMonday"
+    })
+    df["IsBlackFriday"] = df["IsBlackFriday"].map({
+        "Black Friday": 1,
+        np.nan: 0
+    })
+    df["IsCyberMonday"] = df["IsCyberMonday"].map({
+        "Cyber Monday": 1,
+        np.nan: 0
+    })
     df["IsNationalHoliday"] = df["holiday"]
     df = pd.get_dummies(df, columns=["holiday"])
     df["IsNationalHoliday"] = df["IsNationalHoliday"].fillna(0)
@@ -121,7 +130,8 @@ def main():
     startdate = min(df.date).strftime("%Y-%m-%d")
     endDate = max(df.date).strftime("%Y-%m-%d")
 
-    X_train, X_test = split_train_test_ts(df, startdate, endDate, no_months_test_data)
+    X_train, X_test = split_train_test_ts(df, startdate, endDate,
+                                          no_months_test_data)
 
     # saving train and test data
     X_train.to_csv(datapath["train_data"], index=False)
