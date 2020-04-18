@@ -27,8 +27,8 @@ try {
 
   var x;
   var day_name = { ...date };
-  for (x in date){
-      var d = new Date(date[x]);
+  for (x in date) {
+    var d = new Date(date[x]);
     day_name[x] = d.toDateString();
   }
   /*
@@ -200,80 +200,81 @@ try {
     responsive: [{ breakpoint: 575, options: { legend: { offsetY: -30 } } }]
   };
 
-/*
-    ==================================
-        Sales By Date | Donut Chart
-    ==================================
-*/
-var options = {
-    chart: {
-        type: 'donut',
-        width: 450
-    },
-    colors: ['#5c1ac3', '#e2a03f', '#e7515a', '#8dbf42', '#2196f3', '#ffe1e2', '#25d5e4'],
-    dataLabels: {
-      enabled: false
-    },
+  /*
+      ==================================
+          Sales By Date | Donut Chart
+      ==================================
+  */
+  var options = {
+    chart: { type: "donut", width: 450 },
+    colors: [
+      "#5c1ac3",
+      "#e2a03f",
+      "#e7515a",
+      "#8dbf42",
+      "#2196f3",
+      "#ffe1e2",
+      "#25d5e4"
+    ],
+    dataLabels: { enabled: false },
     legend: {
-        position: 'bottom',
-        horizontalAlign: 'center',
-        fontSize: '14px',
-        markers: {
-          width: 10,
-          height: 10,
-        },
-        itemMargin: {
-          horizontal: 0,
-          vertical: 8
-        }
+      position: "bottom",
+      horizontalAlign: "center",
+      fontSize: "14px",
+      markers: {
+        width: 10,
+        height: 10
+      },
+      itemMargin: { horizontal: 0, vertical: 8 }
     },
     plotOptions: {
       pie: {
         donut: {
-          size: '75%',
-          background: 'transparent',
+          size: "75%",
+          background: "transparent",
           labels: {
             show: true,
             name: {
               show: true,
-              fontSize: '16px',
-              fontFamily: 'Nunito, sans-serif',
+              fontSize: "16px",
+              fontFamily: "Nunito, sans-serif",
               color: undefined,
               offsetY: -10
             },
             value: {
               show: true,
-              fontSize: '26px',
-              fontFamily: 'Nunito, sans-serif',
-              color: '#bfc9d4',
+              fontSize: "26px",
+              fontFamily: "Nunito, sans-serif",
+              color: "#bfc9d4",
               offsetY: 16,
-              formatter: function (val) {
-                return '$' + Math.round(val/1000) + 'k'
+              formatter: function(val) {
+                return "$" + Math.round(val / 1000) + "k";
               }
             },
             total: {
               show: true,
               showAlways: true,
-              label: 'Total',
-              color: '#888ea8',
-              formatter: function (w) {
-                return '$'+ w.globals.seriesTotals.reduce( function(a, b) {
-                  return Math.round((a+b)/1000)
-                }, 0) + 'k'
+              label: "Total",
+              color: "#888ea8",
+              formatter: function(w) {
+                return (
+                  "$" +
+                  w.globals.seriesTotals.reduce(function(a, b) {
+                    return Math.round((a + b) / 1000);
+                  }, 0) +
+                  "k"
+                );
               }
             }
           }
         }
       }
     },
-    stroke: {
-      show: true,
-      width: 25,
-      colors: '#0e1726'
-    },
+    stroke: { show: true, width: 25, colors: "#0e1726" },
     series: Object.values(totalSales_weather),
     labels: Object.values(day_name),
-    responsive: [{
+    responsive: [
+      {
         // breakpoint: 1599,
         // options: {
         //     chart: {
@@ -287,24 +288,19 @@ var options = {
 
         breakpoint: 1400,
         options: {
-            chart: {
-                width: '250px',
-                height: '390px'
-            },
-            legend: {
-                position: 'bottom'
-            },
-            plotOptions: {
-              pie: {
-                donut: {
-                  size: '70%',
-                }
+          chart: { width: "250px", height: "390px" },
+          legend: { position: "bottom" },
+          plotOptions: {
+            pie: {
+              donut: {
+                size: "70%"
               }
             }
-        },
-    }]
-}
-
+          }
+        }
+      }
+    ]
+  };
 
   /*
       ==============================
@@ -326,12 +322,9 @@ var options = {
         Sales By Date | Render
     =================================
 */
-var chart = new ApexCharts(
-    document.querySelector("#chart-2"),
-    options
-);
+  var chart = new ApexCharts(document.querySelector("#chart-2"), options);
 
-chart.render();
+  chart.render();
 
   /*
       =============================================
