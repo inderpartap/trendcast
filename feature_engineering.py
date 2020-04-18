@@ -38,7 +38,8 @@ def feature_engineering(df):
     df["day_cos"] = np.cos((df.quarter - 1) * (2.0 * np.pi / 30))
     df["totQty_sqrt"] = np.sqrt(abs(df.totalQuantity))
     df["totalQty_inverse"] = 1 / (df.totalQuantity + 1.534)
-    df["province_freq_encoding"] = df.province.map(df.province.value_counts()) / len(df)
+    df["province_freq_encoding"] = df.province.map(
+        df.province.value_counts()) / len(df)
     df["province_label_encoding"] = df.province.map(province_map)
     df["city_freq_encoding"] = df.city.map(df.city.value_counts()) / len(df)
     df["city_name_len"] = df.city.apply(lambda x: len(x))
@@ -97,7 +98,8 @@ def main():
     startdate = min(df.date).strftime("%Y-%m-%d")
     endDate = max(df.date).strftime("%Y-%m-%d")
 
-    X_train, X_test = split_train_test_ts(df, startdate, endDate, no_months_test_data)
+    X_train, X_test = split_train_test_ts(df, startdate, endDate,
+                                          no_months_test_data)
 
     # saving train and test data
     X_train.to_csv(output_training_data, index=False)  # datapath['train_data']
