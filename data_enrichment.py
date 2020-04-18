@@ -1,9 +1,11 @@
 from datetime import datetime
-from utils.utils import *
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+
+from utils.utils import *
 
 
 def transform_date(df):
