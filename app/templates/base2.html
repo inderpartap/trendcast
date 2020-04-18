@@ -115,13 +115,9 @@
         <!--  BEGIN CONTENT AREA  -->
         <div id="content" class="main-content">
             <div class="layout-px-spacing">
-
-                <div class="row layout-top-spacing">
-                        <div class="col-lg-7 col-12 mx-auto">
-                            <form class="form-inline justify-content-center" action = "/predictions/result" method = "POST">
-                                <label class="sr-only" for="inlineFormInputName">Name</label>
-                                <!-- <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName" placeholder="City Name" name = "city">    -->
-                                <div class="col-lg-3 col-12 mx-auto">
+                            <form class="justify-content-center" action = "/predictions/result" method = "POST">
+                                <div class="row layout-top-spacing">
+                                <div class="col-md-3">
                                 <select class="selectpicker" data-live-search="true" name = "city">
                                         <option>Calgary</option>    <option>Camrose</option>    <option>Cranbrook</option>  <option>Edmonton</option>
                                         <option>Fort St John</option>    <option>Kamloops</option>    <option>Kelowna</option>  <option>Lethbridge</option>
@@ -132,7 +128,7 @@
                                         <option>White Rock</option>    <option>Williams lake</option>    <option>Yorkton</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-3 col-12 mx-auto">
+                                <div class="col-md-3">
                                 <select class="selectpicker" data-live-search="true" name = "department">
                                         <option>All Departments</option>
                                         <option>Department 1</option>    <option>Department 2</option>    <option>Department 3</option>
@@ -142,14 +138,16 @@
                                         <option>Department 13</option>    <option>Department 14</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-3 col-12 mx-auto">
+                                <div class="col-md-3">
                                 <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                    </div>
                                 </div>
                             </form>
-                        </div>
+
+                    <div class="row layout-top-spacing">
                         {% block content %}
                         {% endblock %}
-                </div>
+                    </div>
             </div>
 
 
