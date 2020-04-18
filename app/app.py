@@ -46,13 +46,18 @@ def sales_predictions():
             )
         else:
             data_base, data_weather = deptlevel(cityname, department_lower)
-            return render_template(
-                "dept_predictions.html",
-                result_base=data_base,
-                result_weather=data_weather,
-                city=cityname,
-                department=department,
-            )
+            if data_base and data_weather:
+                return render_template(
+                    "dept_predictions.html",
+                    result_base=data_base,
+                    result_weather=data_weather,
+                    city=cityname,
+                    department=department,
+                )
+            else:
+                return render_template("no_model.html",
+                                       city=cityname,
+                                       department=department)
 
 
 @app.errorhandler(404)
