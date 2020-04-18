@@ -221,10 +221,7 @@ try {
       position: "bottom",
       horizontalAlign: "center",
       fontSize: "14px",
-      markers: {
-        width: 10,
-        height: 10
-      },
+      markers: { width: 10, height: 10 },
       itemMargin: { horizontal: 0, vertical: 8 }
     },
     plotOptions: {
@@ -290,13 +287,7 @@ try {
         options: {
           chart: { width: "250px", height: "390px" },
           legend: { position: "bottom" },
-          plotOptions: {
-            pie: {
-              donut: {
-                size: "70%"
-              }
-            }
-          }
+          plotOptions: { pie: { donut: { size: "70%" } } }
         }
       }
     ]
