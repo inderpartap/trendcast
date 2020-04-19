@@ -163,8 +163,8 @@ try {
       borderColor: "#191e3a",
       strokeDashArray: 5,
       xaxis: { lines: { show: true } },
-      yaxis: { lines: { show: false } },
-      padding: { top: 0, right: 0, bottom: 0, left: -10 }
+      yaxis: { lines: { show: true } },
+      padding: { top: 0, right: 30, bottom: 0, left: 0 }
     },
     legend: {
       position: "top",
