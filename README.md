@@ -13,6 +13,12 @@
 > Retailers.<br /> Our `Dashboard` will predict your inventory requirements with
 > the help of `past sales` and real-time `weather forecast`
 
+<p align="center">
+	<a href="https://www.youtube.com/watch?v=9ela0BQeP9M" alt="Youtube Video">
+        <img src="https://img.youtube.com/vi/9ela0BQeP9M/0.jpg" />
+    </a>
+	</p>
+	
 ## ✨ Demo
 
 Go to the app folder and run:
@@ -37,7 +43,7 @@ Install the application requirements in a linux environment:
 pip install requirements.txt
 ```
 
-Make sure to unzip the retail dataset to start working. The prebuilt dataset can be found [here](https://github.com/inderpartap/trendcast/blob/master/data/fashion_retail.csv)
+Make sure to unzip the retail dataset to start working. The prebuilt dataset can be found [here](https://github.com/inderpartap/trendcast/blob/master/data/fashion_retail.zip)
 
 ```sh
 unzip fashion_retail.zip

@@ -257,8 +257,8 @@ try {
                 return (
                   "$" +
                   w.globals.seriesTotals.reduce(function(a, b) {
-                    return Math.round((a + b) / 1000);
-                  }, 0) +
+                    return Math.round((a + b));
+                  }, 0)/1000 +
                   "k"
                 );
               }
