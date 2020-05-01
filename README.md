@@ -18,7 +18,7 @@
         <img src="https://img.youtube.com/vi/9ela0BQeP9M/0.jpg" />
     </a>
 	</p>
-	
+
 ## ✨ Demo
 
 Go to the app folder and run:
@@ -43,12 +43,11 @@ Install the application requirements in a linux environment:
 pip install requirements.txt
 ```
 
-Make sure to unzip the retail dataset to start working. The prebuilt dataset can be found [here](https://github.com/inderpartap/trendcast/blob/master/data/fashion_retail.zip)
+Make sure to add a retail dataset in the data folder to start working.
 
 ```sh
-unzip fashion_retail.zip
+Columns used in our the dataset are (date, province, city, category, department, class, article, totalSales, totalQuantity)
 ```
-
 
 That's it. You can now start contributing to the project.
 
