@@ -43,12 +43,11 @@ Install the application requirements in a linux environment:
 pip install requirements.txt
 ```
 
-Make sure to add a retail dataset in the data folder to start working. 
+Make sure to add a retail dataset in the data folder to start working.
 
 ```sh
 Columns used in our the dataset are (date, province, city, category, department, class, article, totalSales, totalQuantity)
 ```
-
 
 That's it. You can now start contributing to the project.
 
