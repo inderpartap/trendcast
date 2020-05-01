@@ -18,7 +18,7 @@
         <img src="https://img.youtube.com/vi/9ela0BQeP9M/0.jpg" />
     </a>
 	</p>
-	
+
 ## ✨ Demo
 
 Go to the app folder and run:
